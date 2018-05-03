@@ -1,0 +1,41 @@
+<table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Symbol</th>
+          <th>Current Value</th>
+          <th>INR</th>
+          <th colspan="3">change(INR)</th>
+          <th colspan="3">change(USD)</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>1h</th>
+          <th>24h</th>
+          <th>7d</th>
+          <th>1h</th>
+          <th>24h</th>
+          <th>7d</th>
+        </tr> 
+      </thead>
+      <tbody>
+        <% currency_info.each do |base_currency| %>
+          <tr>
+            <td><%= base_currency.rank %></td>
+            <td class="bold"><%= base_currency.symbol %></td>
+            <td><%= base_currency.current_price %></td>
+            <td><%= base_currency.price_inr %></td>
+            <td class="<%=base_currency.perc_change_1h_inr.negative? ? "negative" : "positive" %>"><%= base_currency.perc_change_1h_inr %></td>
+            <td class="<%=base_currency.perc_change_24h_inr.negative? ? "negative" : "positive"%>" ><%= base_currency.perc_change_24h_inr %></td>
+            <td class="<%=base_currency.perc_change_7d_inr.negative? ? "negative" : "positive" %>"><%= base_currency.perc_change_7d_inr %></td>
+            <td class="<%=base_currency.perc_change_1h_usd.negative? ? "negative" : "positive" %>"><%= base_currency.perc_change_1h_usd %></td>
+            <td class="<%=base_currency.perc_change_24h_usd.negative? ? "negative" : "positive" %>"><%= base_currency.perc_change_24h_usd %></td>
+            <td class="<%=base_currency.perc_change_7d_usd.negative? ? "negative" : "positive" %>"><%= base_currency.perc_change_7d_usd %></td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>

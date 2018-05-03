@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cryptowatch</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <header class="row">
+        <div class="col-lg-6">
+          <h2 class="title">CryptoWatch</h3>
+        </div>
+        <nav class="col-lg-6">
+          <div class="row">
+            <div class="col-md-2">
+              <a href="#" class="menu-item">Home</a> 
+            </div>
+            <div class="col-md-2">
+              <a href="#" class="menu-item">About</a> 
+            </div>
+            <div class="col-md-2">
+              <a href="#" class="menu-item">Contact</a> 
+            </div>
+            <div class="col-md-2">
+              <a href="#" class="menu-item">Sign in</a> 
+            </div> 
+          </div>
+        </nav>
+      </header>
+      <div class="row">
+        <%= yield %>
+      </div>
+      <footer class="row">
+        <div class="col-lg-12">
+          <span>&copy; <%=DateTime.now.year%> Sreedev Kodichath | All Rights Reserved.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
