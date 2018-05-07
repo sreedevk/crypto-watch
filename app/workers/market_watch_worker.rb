@@ -50,6 +50,7 @@ class MarketWatchWorker
 
   def log_old_data(currency)
     log_attributes = currency.slice(:current_price, :rank, :circulating_supply, :total_supply, :max_supply, :price_eur, :price_inr, :volume_24h_usd, :volume_24h_inr, :volume_24h_eur, :perc_change_1h_usd, :perc_change_1h_inr, :perc_change_1h_eur, :perc_change_24h_usd, :perc_change_24h_inr, :perc_change_24h_eur, :perc_change_7d_usd, :perc_change_7d_inr, :perc_change_7d_eur, :market_cap_usd, :market_cap_inr, :market_cap_eur, :update_time)
+    log_attributes[:currency_id] = currency.id
     currency_history = CurrencyHistory.create(log_attributes)
     return currency_history.errors.full_messages.present? ? false : true
   end

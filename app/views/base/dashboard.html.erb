@@ -1,0 +1,182 @@
+<div class="wrapper">
+  <%= render partial: 'sidebar' %>
+
+    <div class="main-panel">
+      <%= render partial: 'top_navbar' %> 
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!--Currency Card-->
+                    <%= render partial: 'top_currencies', locals: {top_currencies: @top_currencies}%> 
+                  <!--currency card ends-->
+                </div>
+                <div class="row card">
+                  <%=render partial: 'currency_info_index', locals: {currency_chart: @currency_info, conversion_medium: @conversion_medium}%>
+                </div> 
+                <div class="row"> 
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="header">
+                              <%= image_tag "crypto-logos/bitcoin.svg", class: "chart-logo inline-block" %>
+                                <h4 class="title inline-block">Bitcoin Value Mapping</h4>
+                                <div class="currency-info" style="float: right;">
+                                  <p class="category">Current Value:</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div id="BitcoinChart" class="ct-chart"></div>
+                                <div class="footer">
+                                    <!--<div class="chart-legend">
+                                        <i class="fa fa-circle text-info"></i> Bitcoin
+                                        <i class="fa fa-circle text-warning"></i> Ethereum
+                                    </div>-->
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="ti-check"></i> Data information certified
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <div class="col-md-6">
+                        <div class="card">
+                            <div class="header">
+                                <%= image_tag "crypto-logos/ethereum.svg", class: "inline-block eth-chart-logo" %>
+                                <h4 class="title inline-block">Ethereum Value Mapping</h4>
+                                <div class="currency-info" style="float: right;">
+                                  <p class="category">Current Value:</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div id="EthereumChart" class="ct-chart"></div>
+                                <div class="footer">
+                                    <!--
+                                    <div class="chart-legend">
+                                        <i class="fa fa-circle text-info"></i> Bitcoin
+                                        <i class="fa fa-circle text-warning"></i> Ethereum
+                                    </div>
+                                    -->
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="ti-check"></i> Data information certified
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0)">
+                                Sreedev Kodichath
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://blog.creative-tim.com">
+                               Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.creative-tim.com/license">
+                                Licenses
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="copyright pull-right">
+                  &copy; 2018 Sreedev Kodichath | All Rights Reserved
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+  function bitcoin_chart(){
+    var data = {
+      labels: <%=CurrencyHistory.where(currency_id: 1).order(:update_time).pluck(:update_time).map{|x|x.strftime('%I:%M %P')}.uniq.first(10).to_json.html_safe%>,
+      series: [
+        <%= CurrencyHistory.where(currency_id: 1).order(:update_time).first(10).send("pluck", current_price(@conversion_medium)).to_json.html_safe %>
+      ]
+    }
+
+    var options = {                                                         
+       eriesBarDistance: 10,                                              
+       axisX: {                                                            
+              showGrid: false                                                 
+             },                                                                  
+        height: "245px"                                                     
+       };  
+
+      var responsiveOptions = [                                               
+        ['screen and (max-width: 640px)', {                                   
+           seriesBarDistance: 5,                                               
+            axisX: {                                                            
+                 labelInterpolationFnc: function (value) {                         
+                      return value[0];                                                
+                }                                                                 
+             }                                                                   
+         }]                                                                    
+      ]; 
+
+      Chartist.Line('#BitcoinChart', data, options, responsiveOptions);
+
+  }
+
+  function ethereum_chart(){
+    var data = {
+      labels: <%=CurrencyHistory.where(currency_id: 2).order(:update_time).pluck(:update_time).map{|x|x.strftime('%I:%M %P')}.uniq.first(10).to_json.html_safe%>,
+      series: [
+        <%= CurrencyHistory.where(currency_id: 2).order(:update_time).first(10).send("pluck", current_price(@conversion_medium)).to_json.html_safe %>
+      ]
+    }
+
+    var options = {                                                         
+       eriesBarDistance: 10,                                              
+       axisX: {                                                            
+              showGrid: false                                                 
+             },                                                                  
+        height: "245px"                                                     
+       };  
+
+      var responsiveOptions = [                                               
+        ['screen and (max-width: 640px)', {                                   
+           seriesBarDistance: 5,                                               
+            axisX: {                                                            
+                 labelInterpolationFnc: function (value) {                         
+                      return value[0];                                                
+                }                                                                 
+             }                                                                   
+         }]                                                                    
+      ]; 
+
+      Chartist.Line('#EthereumChart', data, options, responsiveOptions);
+
+  }
+
+  $(document).ready(function(){
+      bitcoin_chart();
+      ethereum_chart();
+      demo.initChartist(); 
+      //$.notify({
+      //    icon: 'ti-bell',
+      //    message: "Welcome to <b>CryptoWatch</b> - Best Cryptocurrency Market Analyser."
+      //},{
+      //    type: 'success',
+      //    timer: 4000
+      //});
+
+  });
+</script>

@@ -1,0 +1,6 @@
+---
+name: MarketWatcher
+cron: "*/5 * * * *"
+class: MarketWatchWorker
+args: "convert=INR"
+# queue: 

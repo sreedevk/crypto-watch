@@ -1,0 +1,29 @@
+<%top_currencies.each do |currency|%>
+<div class="col-lg-3 col-sm-6">
+    <div class="card">
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="icon-big icon-info text-center top-box">
+                      <%= image_tag "crypto-logos/#{currency.name.downcase.gsub(' ', '')}.svg", class: 'topbar-logo'%>
+                      <!--<i class="ti-twitter-alt"></i>-->
+                    </div>
+                </div>
+                <div class="col-xs-7">
+                    <div class="numbers">
+                      <p class="top-currency-name"><%=currency.name%></p>
+                        <p class="top-currency-value">&#8377; <%=currency.send(current_price(@conversion_medium))&.round(3)%></p>
+                        <p class="top-perc-change <%=currency.send("perc_change_1h_#{@conversion_medium}")&.negative? ? "red" : "green"%> "><span class="growth Arraow"><%=arrow_name(currency.send("perc_change_1h_#{@conversion_medium}"))%></span> <%=currency.send("perc_change_1h_#{@conversion_medium}")%></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <hr />
+                <div class="stats">
+                  <i class="ti-timer"></i> Updated <%=time_ago_in_words(currency.update_time)%> Ago
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%end%>
