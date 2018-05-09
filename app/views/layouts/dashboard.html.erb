@@ -11,6 +11,26 @@
   </head>
   <body>
     <%=yield%>
+    <script>
+        <% if notice %>
+              $.notify({
+                icon: 'ti-bell',
+                message: "<%=notice%>"
+              },{
+                type: 'info',
+                timer: 4000
+              });
+
+          <% elsif alert%>
+              $.notify({
+                icon: 'ti-bell',
+                message: "<%=alert%>"
+              },{
+                type: 'warning',
+                timer: 4000
+              });
+          <% end %>
+    </script>
   </body>
 </html>
 
