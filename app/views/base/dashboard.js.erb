@@ -1,0 +1,5 @@
+$('.currency-table').html("<%=escape_javascript(render partial: 'currency_info_index', locals: {currency_chart: @currency_info, conversion_medium: @conversion_medium})%>");
+$('.pagin').html("<%=escape_javascript(will_paginate @currency_info, inner_window: 1, outer_window: 0, class: 'pagination-card pagination')%>");
+$('.pagination a').each(function(){
+  $(this).attr("data-remote", "true");
+});

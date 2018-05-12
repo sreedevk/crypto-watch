@@ -10,7 +10,66 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%=yield%>
+  <div class="wrapper">
+    <%= render partial: 'base/sidebar'%>
+
+      <div class="main-panel">
+        <%= render partial: 'base/top_navbar' %> 
+          <div class="content">
+              <div class="container-fluid">
+                <%=yield%>                
+              </div>
+          </div>
+
+          <footer class="footer">
+              <div class="container-fluid">
+                  <nav class="pull-left">
+                      <ul>
+                          <li>
+                              <a href="javascript:void(0)">
+                                  Sreedev Kodichath
+                              </a>
+                          </li>
+                          <li>
+                              <a href="http://sreedev.com">
+                                 Blog
+                              </a>
+                          </li>
+                          <li>
+                              <a href="http://www.creative-tim.com/license">
+                                  Licenses
+                              </a>
+                          </li>
+                      </ul>
+                  </nav>
+                  <div class="copyright pull-right">
+                    &copy; 2018 Sreedev Kodichath | All Rights Reserved
+                  </div>
+              </div>
+          </footer>
+
+      </div>
+  </div>
+    <script>
+        <% if notice %>
+              $.notify({
+                icon: 'ti-bell',
+                message: "<%=notice%>"
+              },{
+                type: 'info',
+                timer: 4000
+              });
+
+          <% elsif alert%>
+              $.notify({
+                icon: 'ti-bell',
+                message: "<%=alert%>"
+              },{
+                type: 'warning',
+                timer: 4000
+              });
+          <% end %>
+    </script>
   </body>
 </html>
 

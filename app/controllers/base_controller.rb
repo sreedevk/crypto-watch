@@ -1,11 +1,20 @@
 class BaseController < ApplicationController
+  before_action :authenticate_user!
   layout 'dashboard'
   def dashboard 
     params[:convert] ||= "INR"
     @conversion_medium = params[:convert]&.downcase
     @top_currencies = Currency.where(name: ["Bitcoin", "Ethereum", "Ripple", "Bitcoin Cash"]).order(:id)
     @currency_info = Currency.order(:id).paginate(index_params)
-    session[:notifications] = [{title: "test_title", content: "test_content", icon_class: "fa-usd"}]
+    session[:notifications] = Notification.unread(current_user.id).pluck(:title, :content, :icon_name)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def crypto_news
+    @news = NewsInfo.paginate(index_params)
   end
   
   private

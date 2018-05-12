@@ -1,0 +1,17 @@
+<div class="login-box card">
+<h2>Password Recovery</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-group">
+    <%= f.input :email, required: true, autofocus: true, input_html: {class: 'form-control', placeholder: 'john@doe.com'} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Send me reset password instructions", class: 'btn btn-warning'%>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>

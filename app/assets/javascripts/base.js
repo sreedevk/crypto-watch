@@ -7,6 +7,10 @@ function navbarToggle(){
   });
 }
 
-$(document).ready(function(){
+//$(document).ready(function(){
+//  navbarToggle();
+//});
+
+$(document).on('turbolinks:load', function(){
   navbarToggle();
 });
