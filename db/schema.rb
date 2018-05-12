@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507134521) do
+ActiveRecord::Schema.define(version: 20180512073134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,30 @@ ActiveRecord::Schema.define(version: 20180507134521) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["currency_id"], name: "index_currency_histories_on_currency_id"
+  end
+
+  create_table "news_infos", force: :cascade do |t|
+    t.string "title"
+    t.bigint "news_provider_id"
+    t.string "link"
+    t.string "media_content"
+    t.string "enclosure"
+    t.datetime "published_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "content"
+    t.text "categories"
+    t.index ["news_provider_id"], name: "index_news_infos_on_news_provider_id"
+  end
+
+  create_table "news_providers", force: :cascade do |t|
+    t.string "name"
+    t.string "source"
+    t.string "update_frequency"
+    t.integer "update_period"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notifications", force: :cascade do |t|

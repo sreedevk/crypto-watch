@@ -1,0 +1,55 @@
+<script type="text/javascript">
+<% @top_currencies.each do |currency| %>
+  function <%=currency.name.gsub(' ', '').downcase%>_chart(){
+    var data = {
+      labels: <%=CurrencyHistory.where(currency_id: currency.id).order(update_time: :desc).pluck(:update_time).map{|x|x.strftime('%I:%M %P')}.uniq.first(10).to_json.html_safe%>,
+      series: [
+        <%= CurrencyHistory.where(currency_id: currency.id).order(update_time: :desc).last(10).send("pluck", current_price(@conversion_medium)).to_json.html_safe %>
+      ]
+    }
+
+    var options = {                                                         
+       eriesBarDistance: 10,                                              
+       axisX: {                                                            
+              showGrid: false                                                 
+             },                                                                  
+        height: "245px",
+        width: ($(window).width() - 100) + "px"                                                    
+       };  
+
+      var responsiveOptions = [                                               
+        ['screen and (max-width: 640px)', {                                   
+           seriesBarDistance: 5,                                               
+            axisX: {                                                            
+                 labelInterpolationFnc: function (value) {                         
+                      return value[0];                                                
+                }                                                                 
+             }                                                                   
+         }]                                                                    
+      ]; 
+
+      Chartist.Line('#<%=currency.name.gsub(' ', '').downcase%>Chart', data, options, responsiveOptions);
+
+  }
+<% end %>
+  
+  $(document).ready(function(){
+      $('.tabs').tabslet(); 
+      <%@top_currencies.each do |currency|%>
+          <%=currency.name.gsub(' ', '').downcase%>_chart();
+      <% end %>
+      //$.notify({
+      //    icon: 'ti-bell',
+      //    message: "Welcome to <b>CryptoWatch</b> - Best Cryptocurrency Market Analyser."
+      //},{
+      //    type: 'success',
+      //    timer: 4000
+      //});
+
+  });
+
+
+$('.pagination a').each(function(){
+  $(this).attr("data-remote", 'true');
+});
+</script>

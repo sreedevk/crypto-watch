@@ -1,6 +1,9 @@
----
-name: MarketWatcher
-cron: "*/5 * * * *"
-class: MarketWatchWorker
-args: "convert=INR"
-# queue: 
+market_watch_job:
+  cron: "*/5 * * * *"
+  class: "MarketWatchWorker"
+  args: "convert=INR"
+
+news_job:
+  cron: "*/30 * * * *" # execute at every 30 minutes
+  class: "NewsWorker"
+  args: 4
