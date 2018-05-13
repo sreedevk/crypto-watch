@@ -18,7 +18,8 @@ class NewsProvider < ApplicationRecord
   def update_news(raw_feed)
     parsed_feed = Nokogiri::Slop(raw_feed)
     parsed_feed.rss.channel.item.each do |news|
-      NewsInfo.create(title: news.title.content, news_provider_id: self.id, link: news.link.content, enclosure: news.enclosure.attribute("url").value, content: Nokogiri.parse(news.at_xpath(".//description").text.strip).at_css('p').text, categories: news.xpath(".//category").map(&:content))
+      news_item = NewsInfo.find_or_initialize_by(title: news.title.content)
+      news_item.update(title: news.title.content, news_provider_id: self.id, link: news.link.content, enclosure: news.enclosure.attribute("url").value, content: Nokogiri.parse(news.at_xpath(".//description").text.strip).at_css('p').text, categories: news.xpath(".//category").map(&:content))
     end
   end
 end

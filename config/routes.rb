@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'base#dashboard'
   get '/crypto_news', to: 'base#crypto_news'
   get '/currency_summary', to: 'base#currency_summary'
+  get '/newsletter', to: 'base#newsletter'
+  post '/newsletter', to: 'base#subscribe'
 end

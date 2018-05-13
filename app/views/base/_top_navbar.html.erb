@@ -23,7 +23,9 @@
                   <span class="caret"></span>
                 </button> 
                <div href="#notifydrops" class="dropdown-menu notification-card" role="menu" aria-labelledby="dLabel">
-                 <ul class="notification-list">
+               <%if session[:notifications].present? %>
+                <ul class="notification-list">
+                  <li class="notfication-header">Notifications</li>
                    <%session[:notifications].each do |noti_item| %>
                    <li class="notification-item">
                      <div class="not-icon">
@@ -39,6 +41,13 @@
                     Clear all
                   </li>
                  </ul>
+               <% else %>
+                <ul class="notification-list no-nots">
+                   <li class="no-notification-item">
+                     No Notifications Present 
+                   </li> 
+                 </ul>
+               <% end %> 
                </div>
               </li>
             </ul>

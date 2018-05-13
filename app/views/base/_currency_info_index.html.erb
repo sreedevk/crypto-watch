@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <%currency_chart.each do |currency_item|%>
-    <tr>
+      <tr data-attr="<%=currency_item.id%>" class="currency-item">
       <td><%=currency_item.rank%></td>
       <td><%= image_tag "crypto-logos/#{currency_item.name.downcase.gsub(" ", '')}.svg", class: "table-logo"%><%=currency_item.name%></td>
       <td><%=currency_item.send(current_price(conversion_medium))&.round(2)%></td>

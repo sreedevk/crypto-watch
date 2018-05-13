@@ -37,15 +37,7 @@
       $('.tabs').tabslet(); 
       <%@top_currencies.each do |currency|%>
           <%=currency.name.gsub(' ', '').downcase%>_chart();
-      <% end %>
-      //$.notify({
-      //    icon: 'ti-bell',
-      //    message: "Welcome to <b>CryptoWatch</b> - Best Cryptocurrency Market Analyser."
-      //},{
-      //    type: 'success',
-      //    timer: 4000
-      //});
-
+      <% end %> 
   });
 
 

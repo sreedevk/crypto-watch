@@ -14,21 +14,43 @@ class BaseController < ApplicationController
   end
 
   def crypto_news
-    @news = NewsInfo.paginate(index_params)
+    params[:per_page] = 12
+    @news = NewsInfo.search(params[:keyword]).paginate(index_params)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def currency_summary
     if params[:currency_id].present?
       params[:convert] ||= "INR"
+      params[:per_page] = 3
+      @currency_list = Currency.order(:rank).pluck(:name, :id)
       @conversion_medium = params[:convert]&.downcase
       @currency = Currency.find_by(id: params[:currency_id])
       @twitter = TWITTER_CLIENT.search("#{@currency.name} -rt", lang: "en", result_type: "recent", count: 10).to_h
       @labels = CurrencyHistory.where(currency_id: @currency.id).order(:update_time).pluck(:update_time).map{|x|x.strftime('%I:%M %P')}.uniq.first(10).to_json.html_safe
       @values = CurrencyHistory.where(currency_id: @currency.id).order(:update_time).last(10).send("pluck", current_price(@conversion_medium)).to_json.html_safe 
+      @news = NewsInfo.search("#{@currency.name}").paginate(index_params).uniq
       render "currency_summary"
     else
       flash[:notice] = "Currency Not Specified"
       redirect_to :dashboard
+    end
+  end
+
+  def subscribe
+    if params[:email].present?
+      subscriber = Subscriber.find_or_initialize_by(email: params[:email])
+      if subscriber.new_record?
+        render json: { status: 'notice', message: "Thank you for subscribing to our newsletter, #{params[:name]}" }, status: 200
+      else
+        subscriber.update(name: params[:name], email: params[:email])
+        render json: { status: 'failure', message: "Your Email is already on our subscriber's list, #{params[:name]}" }, status: 422
+      end
+    else
+      render json: {status: 'notice', message: "Please Enter Valid Details" }, status: 402
     end
   end
   

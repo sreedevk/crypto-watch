@@ -6,3 +6,10 @@
 @import 'themify-icons';
 @import 'base';
 @import 'auth';
+@import 'select2.min';
+@import 'tippy.js/dist/tippy.css';
+@import 'toastr';
+
+#toast-container{
+  margin: 15px;
+}

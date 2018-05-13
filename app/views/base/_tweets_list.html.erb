@@ -1,0 +1,27 @@
+<div class="twitter_box">
+    <h4>Lastest Tweets</h4>
+  <div class="tweets-list-box" seamless>
+    <% twitter[:statuses].each do |tweet| %>
+      <%if tweet[:retweet_count] >= 0 %>
+      <div class="card twitter-card">
+        <div class="row">
+          <div class="col-md-2">
+            <img src="<%=tweet[:user][:profile_image_url]%>" class="twitter_img"/>
+          </div>
+          <div class="col-md-10">
+            <div class="twitter-name">
+              <%=tweet[:user][:name]%><br>
+              <a href="<%=tweet[:user][:url]%>">@<%=tweet[:user][:screen_name]%></a>
+            </div>
+            <%=tweet[:text].split(/https:\/\/t.co/).first%><br>
+            <div class="tweet-stat">
+              <span><%=image_tag "twitter/favorite.png", class: 'retweet-icon' %>&nbsp;<%=tweet[:favorite_count]%></span>&nbsp;
+              <span><%=image_tag "twitter/retweet.png", class: 'retweet-icon' %>&nbsp;<%=tweet[:retweet_count]%></span>
+            </div>
+          </div>
+        </div> 
+      </div>
+    <% end %> 
+   <% end %> 
+  </div>
+</div>

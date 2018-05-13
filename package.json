@@ -1,5 +1,7 @@
 {
   "name": "cryptowatch",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "tippy.js": "^2.5.2"
+  }
 }
