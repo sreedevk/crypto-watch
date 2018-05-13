@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="search-box">
+            <%= select_tag :currency_id, options_for_select(@currency_list, params[:currency_id]), class: 'form-control currency-select'%>
+          </div>
+          <%= render partial: 'currency_card', locals: {currency: @currency, conversion_medium: @conversion_medium}%> 
+        </div>
+        <div class="col-md-12">
+          <%= render partial: 'base/tweets_list', locals: {twitter: @twitter}%> 
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="header">
+              <h3>Hourly Summary for <%=@currency.name%></h3>
+            </div>
+            <div class="content">
+              <div id="<%=@currency.name.gsub(' ', '').strip.downcase%>Chart" class="ct-chart"></div>
+                <div class="footer">
+                  <div class="stats">
+                    <i class="ti-check"></i> Data information certified
+                  </div>
+                </div>
+              </div> 
+            </div> 
+        </div>
+        <div class="col-md-12">
+          <% if @news.present? %>
+            <h4><%=@currency.name%> News</h4>
+            <%= render partial: "base/news_list", locals: {news: @news, per_row: 3}%>
+            <a href="/crypto_news?keyword=<%=@currency.name%>" class="btn btn-default btn-success float-right">More <%=@currency.name%> News &rarr;</a>
+          <% end %> 
+        </div>
+      </div> 
+    </div>
+</div>
+  
+<script>
+function <%=@currency.name.gsub(' ', '').downcase%>_chart(){
+  var data = {
+    labels: <%=@labels%>,
+    series: [<%=@values%>]
+  }
+
+  var options = {                                                         
+     eriesBarDistance: 10,                                              
+     axisX: {                                                            
+            showGrid: false                                                 
+           },                                                                  
+      height: "245px"
+      //width: ($(window).width() - 100) + "px"                                                    
+     };  
+
+    var responsiveOptions = [                                               
+      ['screen and (max-width: 640px)', {                                   
+         seriesBarDistance: 5,                                               
+          axisX: {                                                            
+               labelInterpolationFnc: function (value) {                         
+                    return value[0];                                                
+              }                                                                 
+           }                                                                   
+       }]                                                                    
+    ]; 
+
+    Chartist.Line('#<%=@currency.name.gsub(' ', '').downcase%>Chart', data, options, responsiveOptions);
+
+}
+
+$(document).ready(function(){
+  <%=@currency.name.gsub(' ', '').downcase%>_chart();
+});
+</script>
+
+    

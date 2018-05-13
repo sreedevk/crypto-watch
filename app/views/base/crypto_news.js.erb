@@ -1,0 +1,1 @@
+$('.news-container').html("<%= escape_javascript(render partial: "base/news_list", locals: {news: @news, per_row: 4})%>");

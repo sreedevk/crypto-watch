@@ -3,26 +3,10 @@
     <h3>Cryptocurrency News</h3>
   </div>
   <div class="col-lg-4">
-    <input class="news-search form-control" type="text" />
+    <input class="news-search form-control" value="<%=params[:keyword]%>" type="text" name="keyword" placeholder="Search News" autocomplete="off"/>
   </div>
 </div>
 <br>
-<%=@news.each_slice(4) do |news_slice|%>
-  <div class="row">
-    <%news_slice&.each do |news|%>
-    <div class="col-md-3">
-      <div class="card news-card">
-          <img class="card-img-top" src="<%=news&.enclosure%>" />
-          <div class="card-header">
-            <h4><%=news&.title%></h4>       
-            <sub><%=news&.created_at&.strftime('%a - %d/%m/%Y')%></sub>
-          </div>
-          <div class="card-body">
-            <p><%=news&.content%></p> 
-            <a class="btn btn-info" href="<%=news&.link%>">Read More &rarr;</a>
-          </div>
-        </div>
-    </div>
-    <% end %> 
-  </div>  
-<% end %>
+<div class="news-container">
+  <%= render partial: "base/news_list", locals: {news: @news, per_row: 4}%>
+</div>

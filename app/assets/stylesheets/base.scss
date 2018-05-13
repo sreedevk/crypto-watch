@@ -245,3 +245,150 @@ ul.horizontal{
   background-origin: content-box; 
   background-position: 340px;
 }
+
+.csummary-logo{
+  width: 160px; 
+  margin: 10px auto;
+}
+
+.attribute{
+  font-weight: bolder;
+}
+
+.value{
+  float: right;
+}
+
+.no-nots{
+  text-align: center;
+}
+
+.twitter_img{
+ border-radius: 50px; 
+}
+
+.float-right{
+  float: right !important;
+}
+
+.float-left{
+  float: left !important;
+}
+
+.twitter-card{
+  padding: 15px;
+}
+
+.retweet-icon{
+  width: 20px;
+}
+
+.tweet-stat{
+  margin: 5px 0px;
+  text-align: right;
+}
+
+.tweets-list-box{
+  &::-webkit-scrollbar{
+    width: 0px;
+  }
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.search-box{
+ margin: 0px 0px 10px 0px; 
+}
+
+.currency-item{
+  cursor: pointer;
+}
+
+.newsletter-card{
+  padding: 5px 30px;
+}
+
+.subscribe-button{
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.newsletter-info-card{
+  padding: 20px;
+  background: rgb(27, 27, 27);
+  color: white;
+}
+
+.mail-image{
+  width: 40px;
+  padding: 15px 0px;
+}
+
+.social-icon{
+  height: 50px;
+  width: 55px;
+  //transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.facebook-icon{
+  background: url("social/social-sprite.png") -215px -45px;
+}
+
+.twitter-icon{ 
+  background: url("social/social-sprite.png") -335px -45px;
+}
+
+.bitbucket-icon{ 
+  background: url("social/social-sprite.png") -450px -45px;
+}
+
+.github-icon{ 
+  background: url("social/social-sprite.png") -505px -45px;
+}
+
+.inner-row{
+  margin: 0px !important;
+}
+
+.subscriber-content{
+  font-size: 18px;
+}
+
+.linkedin-icon{
+  background: url("social/social-sprite.png") -390px -45px;
+}
+
+.dribbble-icon{
+  background: url("social/social-sprite.png") -705px -45px;
+}
+
+.gplus-icon{
+  background: url("social/social-sprite.png") -765px -45px;
+}
+
+.social-icon-hover{
+  background-position-y: 95px;
+}
+
+.social-intro{
+  margin: 10px 35px;
+}
+
+.blog-intro{
+  margin: 13px 95px;
+  color: white;
+}
+
+.blog-intro-container{
+  background: #16a085;
+  cursor: pointer;
+}
+
+.data-visualization{
+  width: 100%;
+}
+
+.social-container{
+  background: rgb(27, 27, 27);
+}

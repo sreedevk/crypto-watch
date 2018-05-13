@@ -1,3 +1,4 @@
+Sidekiq::Cron::Job.destroy_all!
 schedule_file = File.join(Rails.root, "config", "cron.yml")
 
 if File.exist?(schedule_file) && Sidekiq.server?

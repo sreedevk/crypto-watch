@@ -1,6 +1,6 @@
   <div class="row">
       <!--Currency Card-->
-      <%= render partial: 'top_currencies', locals: {top_currencies: @top_currencies}%> 
+      <%= render partial: 'top_currencies', locals: {top_currencies: @top_currencies, conversion_medium: @conversion_medium}%> 
     <!--currency card ends-->
   </div>
   <div class="row card currency-table">
@@ -31,7 +31,11 @@
                   <%= image_tag "crypto-logos/#{currency.name.gsub(' ', '').strip.downcase}.svg", class: "chart-logo inline-block" %>
                   <h4 class="title inline-block"><%=currency.name%> Value Mapping</h4>
                     <div class="currency-info" style="float: right;">
-                      <p class="category">Current Value: ₹ <%=currency.price_inr.round(3)%></p>
+                      <%if @conversion_medium == "usd" %>
+                        <p class="category">Current Value: $ <%=currency.current_price.round(3)%></p>
+                      <% else %>
+                        <p class="category">Current Value: ₹ <%=currency.send("price_#{@conversion_medium}").round(3)%></p>
+                      <% end %>
                     </div>
                 </div>
                 <div class="content">

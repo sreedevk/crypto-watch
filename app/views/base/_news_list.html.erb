@@ -1,0 +1,19 @@
+<%news.each_slice(per_row) do |news_slice|%>
+  <div class="row">
+    <%news_slice&.each do |news|%>
+     <div class="col-md-<%=12/per_row%>">
+      <div class="card news-card">
+          <img class="card-img-top" src="<%=news&.enclosure%>" />
+          <div class="card-header">
+            <h4><%=news&.title%></h4>       
+            <sub><%=news&.created_at&.strftime('%a - %d/%m/%Y')%></sub>
+          </div>
+          <div class="card-body">
+            <p><%=news&.content%></p> 
+            <a target="_blank" class="btn btn-info" href="<%=news&.link%>">Read More &rarr;</a>
+          </div>
+        </div>
+    </div>
+    <% end %> 
+  </div>  
+<% end %>
