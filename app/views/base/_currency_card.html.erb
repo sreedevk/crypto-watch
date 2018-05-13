@@ -1,0 +1,50 @@
+<div class="card currency-info-card">
+  <%= image_tag "crypto-logos/#{currency.name.gsub(' ', '').strip.downcase}.svg", class: 'csummary-logo card-img-top'%>
+  <div class="card-header">
+    <h3><%=currency.name%></h3>
+  </div>
+  <div class="card-body">
+    <p>
+      <span class="attribute">Current Value:</span>
+      <span class="value">
+        <%=conversion_medium == "usd" ? "$" : "₹"%> <%=currency.send(current_price(conversion_medium))&.round(3)%> 
+      </span>
+    </p>
+    <p>
+      <span class="attribute">Change(1H):</span>
+      <span class="value">
+        <span class="<%=currency.send("perc_change_1h_#{conversion_medium}")&.negative? ? "red" : "green"%> ">
+            <span class="growth Arraow"><%=arrow_name(currency.send("perc_change_1h_#{conversion_medium}"))%>
+              <%=currency.send("perc_change_1h_#{conversion_medium}")%>
+            </span>
+        </span>
+      </span>
+    </p>
+    <p>
+      <span class="attribute">Change(24H):</span>
+      <span class="value">
+        <span class="<%=currency.send("perc_change_24h_#{conversion_medium}")&.negative? ? "red" : "green"%> ">
+            <span class="growth Arraow"><%=arrow_name(currency.send("perc_change_24h_#{conversion_medium}"))%>
+              <%=currency.send("perc_change_24h_#{conversion_medium}")%>
+            </span>
+        </span>
+      </span>
+    </p>
+    <p>
+      <span class="attribute">Change(1W):</span>
+      <span class="value">
+        <span class="<%=currency.send("perc_change_7d_#{conversion_medium}")&.negative? ? "red" : "green"%> ">
+            <span class="growth Arraow"><%=arrow_name(currency.send("perc_change_7d_#{conversion_medium}"))%>
+              <%=currency.send("perc_change_7d_#{conversion_medium}")%>
+            </span>
+        </span>
+      </span>
+    </p>
+    <p>
+      <span class="attribute">Circulating Supply:</span>
+      <span class="value">
+        <%=currency.circulating_supply%> 
+      </span>
+    </p>
+  </div>
+</div>

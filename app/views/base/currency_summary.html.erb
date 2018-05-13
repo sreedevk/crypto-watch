@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-lg-4">
+      <%= render partial: 'currency_card', locals: {currency: @currency, conversion_medium: @conversion_medium}%> 
+    </div>
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="header">
+          <h3>Today's Summary for <%=@currency.name%></h3>
+        </div>
+        <div class="content">
+          <div id="<%=@currency.name.gsub(' ', '').strip.downcase%>Chart" class="ct-chart"></div>
+            <div class="footer">
+              <div class="stats">
+                <i class="ti-check"></i> Data information certified
+              </div>
+            </div>
+        </div> 
+      </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-8">
+    <div class="twitter_box">
+      <%=@twitter[:statuses].first.except(:user)%>
+      <% @twitter[:statuses].each do |tweet| %>
+        <div class="card twitter-card">
+          <%=tweet[:text]%>
+          <%=tweet[:text]%>
+          <%=tweet[:user][:name]%>
+          <%=tweet[:user][:screen_name]%>
+          <%=tweet[:user][:profile_image_url]%>
+        </div>  
+     <% end %> 
+    </div> 
+  </div>
+</div>
+
+
+<script>
+function <%=@currency.name.gsub(' ', '').downcase%>_chart(){
+  var data = {
+    labels: <%=@labels%>,
+    series: [<%=@values%>]
+  }
+
+  var options = {                                                         
+     eriesBarDistance: 10,                                              
+     axisX: {                                                            
+            showGrid: false                                                 
+           },                                                                  
+      height: "245px"
+      //width: ($(window).width() - 100) + "px"                                                    
+     };  
+
+    var responsiveOptions = [                                               
+      ['screen and (max-width: 640px)', {                                   
+         seriesBarDistance: 5,                                               
+          axisX: {                                                            
+               labelInterpolationFnc: function (value) {                         
+                    return value[0];                                                
+              }                                                                 
+           }                                                                   
+       }]                                                                    
+    ]; 
+
+    Chartist.Line('#<%=@currency.name.gsub(' ', '').downcase%>Chart', data, options, responsiveOptions);
+
+}
+
+$(document).ready(function(){
+  <%=@currency.name.gsub(' ', '').downcase%>_chart();
+});
+</script>
+
+    
