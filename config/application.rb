@@ -24,6 +24,9 @@ module Cryptowatch
     config.assets.paths << Rails.root.join("app", "assets", "fonts") 
     config.time_zone = 'Kolkata'
     config.active_record.default_timezone = :local
+    config.to_prepare do
+      Devise::RegistrationsController.layout proc{|controller| user_signed_in? ? "dashboard" : "application"}
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

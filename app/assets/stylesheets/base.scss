@@ -2,10 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body{
-  background: #2f3542;
-}
-
 .title{
   color: white;
 }
@@ -136,8 +132,8 @@ header{
 }
 
 .notification-card{
-  margin-left: -120px;
-  margin-top: -5px;
+  margin-left: -150px;
+  margin-top: 15px;
   width: 400px;
   left: -200px;
 }
@@ -391,4 +387,32 @@ ul.horizontal{
 
 .social-container{
   background: rgb(27, 27, 27);
+}
+
+.box-arrow{
+ position: absolute;
+ margin: -7px 0px 0px 0px;
+ transform: rotate(45deg);
+ right: 30px;
+ z-index: -930;
+ float: right !important;
+ background: #FFFDF4;
+ width: 20px;
+ height: 20px; 
+}
+
+.user-menu{
+  margin: 0px -50px;
+  nav{
+    ul{
+      width: 0px;
+      li{
+        display: block;
+        padding: 5px 0px;
+        a:link, a:visited{
+        
+        }
+      }
+    }
+  }
 }

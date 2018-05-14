@@ -13,22 +13,9 @@
     <%=yield%>
     <script>
       <% if notice %>
-          $.notify({
-            icon: 'ti-bell',
-            message: "<%=notice%>"
-          },{
-            type: 'info',
-            timer: 4000
-          });
-
+        toastr.info("<%=notice%>");
       <% elsif alert%>
-          $.notify({
-            icon: 'ti-bell',
-            message: "<%=alert%>"
-          },{
-            type: 'warning',
-            timer: 4000
-          });
+        toastr.warning("<%=alert%>");
       <% end %>
     </script>
   </body>

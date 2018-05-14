@@ -51,24 +51,11 @@
       </div>
   </div>
     <script>
-        <% if notice %>
-              $.notify({
-                icon: 'ti-bell',
-                message: "<%=notice%>"
-              },{
-                type: 'info',
-                timer: 4000
-              });
-
-          <% elsif alert%>
-              $.notify({
-                icon: 'ti-bell',
-                message: "<%=alert%>"
-              },{
-                type: 'warning',
-                timer: 4000
-              });
-          <% end %>
+      <% if notice %>
+        toastr.info("<%=notice%>");
+      <% elsif alert%>
+        toastr.warning("<%=alert%>");
+      <% end %>
     </script>
   </body>
 </html>

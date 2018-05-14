@@ -1,5 +1,5 @@
 class BaseController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:newsletter]
   layout 'dashboard'
   def dashboard 
     params[:convert] ||= "INR"

@@ -9,7 +9,31 @@
 @import 'select2.min';
 @import 'tippy.js/dist/tippy.css';
 @import 'toastr';
+@import '404';
 
 #toast-container{
   margin: 15px;
 }
+
+.permission_denied{
+  height: 100%;
+  overflow: hidden;
+}
+
+.go-back{
+  padding: 10px;
+  h4{
+    color: white;
+    a:link, a:visited{
+      color: white;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+body:not(.permission_denied){
+  background: #2c3e50;
+}
+
