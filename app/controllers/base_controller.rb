@@ -30,8 +30,6 @@ class BaseController < ApplicationController
       @conversion_medium = params[:convert]&.downcase
       @currency = Currency.find_by(id: params[:currency_id])
       @twitter = TWITTER_CLIENT.search("#{@currency.name} -rt", lang: "en", result_type: "recent", count: 10).to_h
-      @labels = CurrencyHistory.where(currency_id: @currency.id).order(:update_time).pluck(:update_time).map{|x|x.strftime('%I:%M %P')}.uniq.first(10).to_json.html_safe
-      @values = CurrencyHistory.where(currency_id: @currency.id).order(:update_time).last(10).send("pluck", current_price(@conversion_medium)).to_json.html_safe 
       @news = NewsInfo.search("#{@currency.name}").paginate(index_params).uniq
       render "currency_summary"
     else

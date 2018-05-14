@@ -1,13 +1,7 @@
 <script type="text/javascript">
 <% @top_currencies.each do |currency| %>
   function <%=currency.name.gsub(' ', '').downcase%>_chart(){
-    var data = {
-      labels: <%=CurrencyHistory.where(currency_id: currency.id).order(:update_time).pluck(:update_time).map{|x|x.strftime('%I:%M %P')}.uniq.first(10).to_json.html_safe%>,
-      series: [
-        <%= CurrencyHistory.where(currency_id: currency.id).order(:update_time).last(10).send("pluck", current_price(@conversion_medium)).to_json.html_safe %>
-      ]
-    }
-
+    var data =  <%=chart(currency)%>;
     var options = {                                                         
        eriesBarDistance: 10,                                              
        axisX: {                                                            

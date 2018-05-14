@@ -37,5 +37,12 @@ module BaseHelper
     end
   end
 
+  def chart(currency)
+    currency_histories = CurrencyHistory.where(currency_id: currency.id).last(10)
+    labels = currency_histories.pluck(:created_at).map{|x| x.strftime("%I:%M %P")}
+    values = currency_histories.send("pluck", current_price(@conversion_medium))
+    return {labels: labels, series: [values]}.to_json.html_safe
+  end
+
   alias shortened_value_eur shortened_value_usd
 end

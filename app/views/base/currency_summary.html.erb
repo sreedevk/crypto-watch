@@ -42,11 +42,7 @@
   
 <script>
 function <%=@currency.name.gsub(' ', '').downcase%>_chart(){
-  var data = {
-    labels: <%=@labels%>,
-    series: [<%=@values%>]
-  }
-
+  var data = <%=chart(@currency)%>;
   var options = {                                                         
      eriesBarDistance: 10,                                              
      axisX: {                                                            
