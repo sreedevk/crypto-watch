@@ -196,33 +196,6 @@ ul.horizontal{
   margin: 10px 0px;
 }
 
-.pagination-card{
- background: white;
- box-shadow: 2px 2px 5px 5px #eeeeee;
- text-align: center;
- font-size: 16px;
- .previous_page:hover, .next_page:hover{
-  color: white;
-  background: #D24D57;
- }
- a:link, a:visited, em, span{
-  margin: 10px 10px; 
-  padding: 5px 10px; 
- }
- a:link, a:visited{
- }
- em{
-   
- }
- span{
- }
- em.current{  
-   background: #D24D57;
-   color: #ffffff;
-   border-radius: 20px;
- }
-}
-
 .currency-table h3{
   padding: 5px 40px;
 }
@@ -230,6 +203,7 @@ ul.horizontal{
 .news-card{
   img{
     width: 100%;
+    height: 150px;
   }
 }
 
@@ -415,4 +389,50 @@ ul.horizontal{
       }
     }
   }
+}
+
+
+.user-edit-card{
+  padding: 15px 20px;
+  margin: 20px 20px;
+  .input{
+   margin: 30px 0px; 
+  }
+}
+
+.btn-long{
+  width: 100%;
+}
+
+.currency-watch{
+  margin: 30px 0px;
+  padding: 10px;
+}
+
+.currency-watch-container{
+  margin: 40px 0px;
+}
+
+#currency-history-table{
+}
+
+.export-analytics{
+  width: 250px;
+  margin: 20px;
+  float: right;
+}
+
+.history-pagination, .pagination-card{
+  float: right;
+  a:link, a:visited, span, em{
+    padding: 10px 15px;
+    margin: 0px 5px;
+    color: black;
+    transition: 0.5s ease;
+    border-radius: 20px; 
+  }
+  a:hover, em.current{
+    background: #c0392b;
+    color: white;
+  } 
 }

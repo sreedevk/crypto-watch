@@ -1,0 +1,25 @@
+<% currency_history.each do |row| %>
+  <tr>
+    <td><%=format_time(row.created_at).first%><br><%=format_time(row.created_at).last%></td>
+    <td><%=row.send(current_price(conversion_medium))&.round(2)%></td>
+    <td><%=row.send("circulating_supply")%></td>
+    <td class="<%=color_class(row.send("perc_change_1h_#{conversion_medium}"))%>">
+      <span class="alight-left"><%=arrow_name(row.send("perc_change_1h_#{conversion_medium}"))%></span>
+      <%=row.send("perc_change_1h_#{conversion_medium}")%>
+    </td>
+    <td class="<%=color_class(row.send("perc_change_24h_#{conversion_medium}"))%>">
+      <span class="alight-left"><%=arrow_name(row.send("perc_change_24h_#{conversion_medium}"))%></span>
+      <%=row.send("perc_change_24h_#{conversion_medium}")%>
+    </td>
+    <td class="<%=color_class(row.send("perc_change_7d_#{conversion_medium}"))%>">
+      <span class="alight-left"><%=arrow_name(row.send("perc_change_7d_#{conversion_medium}"))%></span>
+      <%=row.send("perc_change_7d_#{conversion_medium}")%>
+    </td>
+    <td>
+      <%=row.send("market_cap_#{conversion_medium}")%> 
+    </td>
+    <td>
+      <%=row.send("volume_24h_#{conversion_medium}")%> 
+    </td>
+  </tr>
+<% end %>

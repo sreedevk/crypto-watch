@@ -1,38 +1,22 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>rank</th>
-      <th>name</th>
-      <th>current price</th>
-      <th>change (1h)</th>
-      <th>change (24h)</th>
-      <th>change (1w)</th>
-      <th>market cap</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%currency_chart.each do |currency_item|%>
-      <tr data-attr="<%=currency_item.id%>" class="currency-item">
-      <td><%=currency_item.rank%></td>
-      <td><%= image_tag "crypto-logos/#{currency_item.name.downcase.gsub(" ", '')}.svg", class: "table-logo"%><%=currency_item.name%></td>
-      <td><%=currency_item.send(current_price(conversion_medium))&.round(2)%></td>
-      <td class="align_right <%=color_class(currency_item.send("perc_change_1h_#{conversion_medium}"))%>">
-        <span class="alight-left"><%=arrow_name(currency_item.send("perc_change_1h_#{conversion_medium}"))%></span>
-        <%=currency_item.send("perc_change_1h_#{conversion_medium}")%>
-      </td>
-      <td class="align_right <%=color_class(currency_item.send("perc_change_24h_#{conversion_medium}"))%>">
-        <span class="alight-left"><%=arrow_name(currency_item.send("perc_change_24h_#{conversion_medium}"))%></span>
-        <%=currency_item.send("perc_change_24h_#{conversion_medium}")%>
-      </td>
-      <td class="align_right <%=color_class(currency_item.send("perc_change_7d_#{conversion_medium}"))%>">
-        <span class="alight-left"><%=arrow_name(currency_item.send("perc_change_7d_#{conversion_medium}"))%></span>
-        <%=currency_item.send("perc_change_7d_#{conversion_medium}")%>
-      </td>
-      <td>
-        <%=currency_item.send("market_cap_#{conversion_medium}")%>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%currency_chart.each do |currency_item|%>
+  <tr data-attr="<%=currency_item.id%>" class="currency-item">
+  <td><%=currency_item.rank%></td>
+  <td><%= image_tag "crypto-logos/#{currency_item.name.downcase.gsub(" ", '')}.svg", class: "table-logo"%><%=currency_item.name%></td>
+  <td><%=currency_item.send(current_price(conversion_medium))&.round(2)%></td>
+  <td class="align_right <%=color_class(currency_item.send("perc_change_1h_#{conversion_medium}"))%>">
+    <span class="alight-left"><%=arrow_name(currency_item.send("perc_change_1h_#{conversion_medium}"))%></span>
+    <%=currency_item.send("perc_change_1h_#{conversion_medium}")%>
+  </td>
+  <td class="align_right <%=color_class(currency_item.send("perc_change_24h_#{conversion_medium}"))%>">
+    <span class="alight-left"><%=arrow_name(currency_item.send("perc_change_24h_#{conversion_medium}"))%></span>
+    <%=currency_item.send("perc_change_24h_#{conversion_medium}")%>
+  </td>
+  <td class="align_right <%=color_class(currency_item.send("perc_change_7d_#{conversion_medium}"))%>">
+    <span class="alight-left"><%=arrow_name(currency_item.send("perc_change_7d_#{conversion_medium}"))%></span>
+    <%=currency_item.send("perc_change_7d_#{conversion_medium}")%>
+  </td>
+  <td>
+    <%=currency_item.send("market_cap_#{conversion_medium}")%>
+  </td>
+</tr>
+<% end %>

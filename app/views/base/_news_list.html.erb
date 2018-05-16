@@ -1,6 +1,6 @@
-<%news.each_slice(per_row) do |news_slice|%>
+<% news.each_slice(per_row) do |news_slice| %>
   <div class="row">
-    <%news_slice&.each do |news|%>
+    <% news_slice&.each do |news| %>
      <div class="col-md-<%=12/per_row%>">
       <div class="card news-card">
           <img class="card-img-top" src="<%=news&.enclosure%>" />
@@ -15,5 +15,5 @@
         </div>
     </div>
     <% end %> 
-  </div>  
+  </div>
 <% end %>

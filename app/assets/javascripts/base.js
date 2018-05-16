@@ -32,6 +32,12 @@ function currencyTableSelect(){
   });
 }
 
+function ajaxPagination(){
+  $('.pagination a').each(function(){
+    $(this).attr("data-remote", 'true');
+  });
+}
+
 function socialIcon(){
   $('.social-icon').mouseover(function(){
     $(this).toggleClass("social-icon-hover");
@@ -84,6 +90,11 @@ function subscription(){
   });
 }
 
+function currencySummaryTable(){
+  //$('#currency-history-table').DataTable({
+  //});
+}
+
 $(document).on('turbolinks:load', function(){
   navbarToggle();
   newsSearch(); 
@@ -93,4 +104,6 @@ $(document).on('turbolinks:load', function(){
   socialTip();
   tooltip();
   subscription();
+  ajaxPagination();
+  //currencySummaryTable();
 });

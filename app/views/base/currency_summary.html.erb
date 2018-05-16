@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="col-lg-8">
-      <div class="row">
+      <div class="row"> 
         <div class="col-md-12">
           <div class="card">
             <div class="header">
@@ -29,15 +29,53 @@
               </div> 
             </div> 
         </div>
+        
         <div class="col-md-12">
           <% if @news.present? %>
             <h4><%=@currency.name%> News</h4>
             <%= render partial: "base/news_list", locals: {news: @news, per_row: 3}%>
             <a href="/crypto_news?keyword=<%=@currency.name%>" class="btn btn-default btn-success float-right">More <%=@currency.name%> News &rarr;</a>
           <% end %> 
-        </div>
+        </div>  
       </div> 
     </div>
+    
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card currency-watch-container">
+      <div class="row">
+        <div class="col-4">
+          <h3 style="margin: 20px;">Currency History Analytics</h3>
+        </div>
+        <div class="col-8">
+          <button class="btn btn-default btn-success export-analytics">Export</button>
+        </div>
+      </div>
+       <table id="currency-history-table" class="table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Value</th>
+          <th>Circulating Supply</th>
+          <th>Change (1H)</th>
+          <th>Change (24H)</th>
+          <th>Change (1W)</th>
+          <th>Market Capital</th>
+          <th>Volume 24H</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%=render partial: 'currency_history_table', locals: {currency_history: @currency_history, conversion_medium: @conversion_medium}%> 
+        <tr>
+          <td colspan="8">
+            <%= will_paginate @currency_history, inner_window: 1, outer_window: 0, class: 'pagination history-pagination'%>
+          </td>
+        </tr>
+      </tbody>
+    </table> 
+    </div>
+  </div> 
 </div>
   
 <script>

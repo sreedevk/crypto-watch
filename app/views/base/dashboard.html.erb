@@ -5,16 +5,35 @@
   </div>
   <div class="row card currency-table">
     <h3>Currency Charts | <%= params[:convert] || "USD"%></h3>
-    <%=render partial: 'currency_info_index', locals: {currency_chart: @currency_info, conversion_medium: @conversion_medium}%>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>rank</th>
+            <th>name</th>
+            <th>current price</th>
+            <th>change (1h)</th>
+            <th>change (24h)</th>
+            <th>change (1w)</th>
+            <th>market cap</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%=render partial: 'currency_info_index', locals: {currency_chart: @currency_info, conversion_medium: @conversion_medium}%>
+          <tr>
+            <td colspan="8">
+              <%= will_paginate @currency_info, inner_window: 1, outer_window: 0, class: 'pagination pagination-card'%>
+            </td>
+          </tr>
+        </tbody>
+     </table>
   </div> 
   <div class="row">
     <div class="col-lg-6"></div>
     <div class="col-lg-6 pagin" style="text-align: right;"> 
-      <%= will_paginate @currency_info, inner_window: 1, outer_window: 0, class: 'pagination pagination-card'%>
     </div>
   </div>
   <div class="row"> 
-
       <div class="col-md-12">
           <div class="title-block">
             <h3 style="color: black;">Today's Top Currency Charts</h3>

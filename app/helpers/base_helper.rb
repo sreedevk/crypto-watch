@@ -7,6 +7,12 @@ module BaseHelper
     conversion_medium.downcase == "usd" ? "current_price" : "price_#{conversion_medium.downcase}"
   end
 
+  def format_time(time)
+    date = time.strftime("%d/%m/%Y")
+    time = time.strftime("%I:%M%p");
+    return time, date
+  end
+
   def arrow_name(value)
     raw(value.to_f.negative? ? "&searr;" : "&nearr;")
   end

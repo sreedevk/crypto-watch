@@ -25,16 +25,23 @@ class BaseController < ApplicationController
   def currency_summary
     if params[:currency_id].present?
       params[:convert] ||= "INR"
-      params[:per_page] = 3
+      params[:per_page] = 10
       @currency_list = Currency.order(:rank).pluck(:name, :id)
       @conversion_medium = params[:convert]&.downcase
       @currency = Currency.find_by(id: params[:currency_id])
-      @twitter = TWITTER_CLIENT.search("#{@currency.name} -rt", lang: "en", result_type: "recent", count: 10).to_h
-      @news = NewsInfo.search("#{@currency.name}").paginate(index_params).uniq
+      #@twitter = TWITTER_CLIENT.search("#{@currency.name} -rt", lang: "en", result_type: "recent", count: 10).to_h
+      @twitter = {}
+      @twitter[:statuses] = {}
+      @news = NewsInfo.search("#{@currency.name}").order(created_at: :desc).last(3)
+      @currency_history = CurrencyHistory.where(currency_id: params[:currency_id]).order(created_at: :desc).paginate(index_params)
       render "currency_summary"
     else
       flash[:notice] = "Currency Not Specified"
       redirect_to :dashboard
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

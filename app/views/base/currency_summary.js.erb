@@ -1,0 +1,4 @@
+$('#currency-history-table tbody').html("<%=escape_javascript(render partial: 'currency_history_table', locals: {currency_history: @currency_history, conversion_medium: @conversion_medium})%><tr><td colspan='8'><%= escape_javascript(will_paginate @currency_history, inner_window: 1, outer_window: 0, class: 'pagination history-pagination')%></td></tr>");
+$('.pagination a').each(function(){
+  $(this).attr("data-remote", "true");
+});
