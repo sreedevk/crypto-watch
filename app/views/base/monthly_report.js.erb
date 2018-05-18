@@ -1,0 +1,1 @@
+$.fileDownload("/reports/<%=@file_name%>").done(function(){toastr.info("Report Download Complete")}).fail(function(){toastr.error("Downloading Report Failed")});

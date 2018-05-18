@@ -22,6 +22,12 @@ class BaseController < ApplicationController
     end
   end
 
+  def monthly_report
+    params[:conversion_medium] = "inr" if params[:conversion_medium].blank?
+    opts = params.permit!.to_h.with_indifferent_access
+    @file_name = Reports.monthly_report(opts)
+  end
+
   def currency_summary
     if params[:currency_id].present?
       params[:convert] ||= "INR"
@@ -29,9 +35,7 @@ class BaseController < ApplicationController
       @currency_list = Currency.order(:rank).pluck(:name, :id)
       @conversion_medium = params[:convert]&.downcase
       @currency = Currency.find_by(id: params[:currency_id])
-      #@twitter = TWITTER_CLIENT.search("#{@currency.name} -rt", lang: "en", result_type: "recent", count: 10).to_h
-      @twitter = {}
-      @twitter[:statuses] = {}
+      @twitter = TWITTER_CLIENT.search("#{@currency.name} -rt", lang: "en", result_type: "recent", count: 10).to_h
       @news = NewsInfo.search("#{@currency.name}").order(created_at: :desc).last(3)
       @currency_history = CurrencyHistory.where(currency_id: params[:currency_id]).order(created_at: :desc).paginate(index_params)
       render "currency_summary"
@@ -60,7 +64,7 @@ class BaseController < ApplicationController
   end
   
   private
-  
+    
   def fetch_data
     MarketWatchWorker.perform_async("convert=INR")
   end

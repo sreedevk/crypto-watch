@@ -49,7 +49,7 @@
           <h3 style="margin: 20px;">Currency History Analytics</h3>
         </div>
         <div class="col-8">
-          <button class="btn btn-default btn-success export-analytics">Export</button>
+          <a class="btn btn-default btn-success export-analytics" href="/monthly_report?conversion_medium=<%=params[:conversion_medium]%>&currency_id=<%=params[:currency_id]%>" data-remote="true">Export Monthly Report</a>
         </div>
       </div>
        <table id="currency-history-table" class="table">

@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   get '/crypto_news', to: 'base#crypto_news'
   get '/currency_summary', to: 'base#currency_summary'
   get '/newsletter', to: 'base#newsletter'
-  get "*unmatched_route", to: 'application#error'
+  get '/monthly_report', to: 'base#monthly_report'
   post '/newsletter', to: 'base#subscribe'
 
 
   # API routes 
   get 'api/currency_history', to: 'api/currency#currency_history'
+  get "*unmatched_route", to: 'application#error'
 end
